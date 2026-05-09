@@ -1,83 +1,49 @@
-# kubectl TUI
+# kubectl-tui
 
-Interactive terminal user interface for Kubernetes operations built with Go and Bubbletea.
+![Go](https://img.shields.io/badge/go-%2300ADD8.svg?style=flat&logo=go&logoColor=white) ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg) ![Kubernetes](https://img.shields.io/badge/kubernetes-compatible-blue?logo=kubernetes)
+
+Terminal UI for Kubernetes cluster inspection with a focus on inference workloads. Like `kubectl get` but live, navigable, and GPU-aware.
+
+## The problem
+
+`kubectl` is the right tool for scripting and automation. It is the wrong tool for exploration and debugging. When a pod is crash-looping, you want the pod, its events, its logs, and the node it is running on, all in one view, updating live. `kubectl get pods && kubectl describe pod && kubectl logs` is three commands and three context switches. This is one.
+
+## The idea
+
+A TUI tuned for clusters running inference workloads. GPU resource visibility is first-class: how much VRAM each pod is using, which nodes have GPUs, whether they are allocated. Common inference patterns (vLLM pods, model servers, operator CRDs) get special handling in the UI.
 
 ## Features
 
-- **Menu-Driven Interface**: Navigate kubectl commands through intuitive menus
-- **Real-Time Execution**: Execute commands and view streaming output
-- **Multi-Level Navigation**: Drill down into deployments, pods, and services
-- **Context-Sensitive Help**: Dynamic help text for each screen
-- **Selection-Based Input**: Choose from available resources instead of typing
+- **resource viewing**: pods, jobs, deployments across namespaces, one navigable list
+- **GPU visibility**: per-pod and per-node GPU allocation. Which pods consume VRAM, which nodes have capacity.
+- **log streaming**: live log tailing without `kubectl logs -f`
+- **port-forward shortcuts**: one keypress to port-forward to a pod's API
+- **filtering**: by label, namespace, or node. Useful when you have 200 pods and care about the vLLM ones.
+- **resource usage**: CPU, memory, and GPU metrics per pod
 
-## Screenshots
+## Key bindings
 
-[Add screenshots here]
+| key | action |
+|---|---|
+| `j`/`k` | navigate |
+| `n` | switch namespace |
+| `f` | filter by label |
+| `l` | logs |
+| `p` | port-forward |
+| `g` | GPU view |
+| `q` | quit |
 
-## Prerequisites
-
-- Go 1.19+
-- kubectl configured for your cluster
-
-## Installation
-
-```bash
-git clone https://github.com/yourusername/kubectl-tui.git
-cd kubectl-tui
-go mod tidy
-go build -o kubectl-tui
-```
-
-## Usage
+## Install
 
 ```bash
-./kubectl-tui
+go install github.com/santura-dev/kubectl-tui@latest
 ```
 
-Navigate through menus to:
-- Get nodes, pods, deployments
-- Describe resources
-- View logs
-- Execute common kubectl operations
+## Related
 
-## Controls
-
-- **↑↓**: Navigate menu items
-- **Enter**: Select item
-- **b**: Go back
-- **q/Ctrl+C**: Quit
-
-## Architecture
-
-Built with:
-- [Bubbletea](https://github.com/charmbracelet/bubbletea) - Terminal UI framework
-- [Bubbles](https://github.com/charmbracelet/bubbles) - UI components
-- [Lipgloss](https://github.com/charmbracelet/lipgloss) - Styling
-
-## Development
-
-```bash
-# Run in development
-go run main.go
-
-# Build for production
-go build -o kubectl-tui -ldflags="-s -w"
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+- [inference-operator-tui](https://github.com/santura-dev/inference-operator-tui) - TUI for local-inference-operator CRDs specifically
+- [vllm-logprob-tui](https://github.com/santura-dev/vllm-logprob-tui) - TUI for vLLM logprob inspection
 
 ## License
 
-MIT License - see LICENSE file for details
-
-## Related Projects
-
-- [vllm-tui](https://github.com/yourusername/vllm-tui) - vLLM chat interface
-- [local-inference-operator](https://github.com/yourusername/local-inference-operator) - K8s operator
-- [operator-tui](https://github.com/yourusername/operator-tui) - Operator management
+MIT
