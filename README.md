@@ -14,24 +14,20 @@ A TUI tuned for clusters running inference workloads. GPU resource visibility is
 
 ## Features
 
-- **resource viewing**: pods, jobs, deployments across namespaces, one navigable list
-- **GPU visibility**: per-pod and per-node GPU allocation. Which pods consume VRAM, which nodes have capacity.
-- **log streaming**: live log tailing without `kubectl logs -f`
-- **port-forward shortcuts**: one keypress to port-forward to a pod's API
-- **filtering**: by label, namespace, or node. Useful when you have 200 pods and care about the vLLM ones.
-- **resource usage**: CPU, memory, and GPU metrics per pod
+- **resource viewing**: pods, deployments, services, jobs, namespaces — one navigable list
+- **GPU visibility**: node view includes `nvidia.com/gpu` allocatable capacity
+- **pod context**: logs (`l`) and full describe (`d`) on any pod, across namespaces
+- **async everything**: kubectl runs off the UI thread with timeouts; the TUI never freezes
 
 ## Key bindings
 
 | key | action |
 |---|---|
-| `j`/`k` | navigate |
-| `n` | switch namespace |
-| `f` | filter by label |
-| `l` | logs |
-| `p` | port-forward |
-| `g` | GPU view |
-| `q` | quit |
+| `↑`/`↓` | navigate |
+| `enter` | open / run |
+| `l` | pod logs |
+| `d` | describe pod |
+| `q` / `esc` | back / quit |
 
 ## Install
 
