@@ -70,12 +70,7 @@ func New() Model {
 		commandItem{"Services", "list services"},
 		commandItem{"Jobs", "list jobs"},
 	})
-	return Model{
-		menu:  menu,
-		pods:  newList("Pods", nil),
-		names: newList("Namespaces", nil),
-		page:  screenMenu,
-	}
+	return Model{menu: menu, page: screenMenu}
 }
 
 func newList(title string, items []list.Item) list.Model {

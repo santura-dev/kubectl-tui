@@ -12,7 +12,7 @@ func TestCharmStackMajorVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, tc := range []struct{ dep, floor string }{
-		{"bubbles", "v0.21"},
+		{"bubbles", "v1.0"},
 		{"bubbletea", "v1.3"},
 		{"lipgloss", "v1.1"},
 	} {
