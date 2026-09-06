@@ -4,6 +4,8 @@
 
 Terminal UI for Kubernetes cluster inspection with a focus on inference workloads. Like `kubectl get` but live, navigable, and GPU-aware.
 
+![menu](assets/menu.png)
+
 ## The problem
 
 `kubectl` is the right tool for scripting and automation. It is the wrong tool for exploration and debugging. When a pod is crash-looping, you want the pod, its events, its logs, and the node it is running on, all in one view, updating live. `kubectl get pods && kubectl describe pod && kubectl logs` is three commands and three context switches. This is one.
@@ -11,6 +13,8 @@ Terminal UI for Kubernetes cluster inspection with a focus on inference workload
 ## The idea
 
 A TUI tuned for clusters running inference workloads. GPU resource visibility is first-class: how much VRAM each pod is using, which nodes have GPUs, whether they are allocated. Common inference patterns (vLLM pods, model servers, operator CRDs) get special handling in the UI.
+
+![pods](assets/pods.png)
 
 ## Features
 
